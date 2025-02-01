@@ -1,3 +1,4 @@
+// Entidade Participante
 package com.sistema.models;
 
 import jakarta.persistence.*;
@@ -14,6 +15,9 @@ public class Participante {
 
     @Column(nullable = false, unique = true)
     private String email;
+    
+    @Column(nullable = false)
+    private String password;
 
  // Getters e Setters
 	public Long getId() {
@@ -40,6 +44,15 @@ public class Participante {
 		this.email = email;
 	}
 
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	
     
     
 }

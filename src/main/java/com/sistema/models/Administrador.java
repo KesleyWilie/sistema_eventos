@@ -15,6 +15,7 @@ public class Administrador {
     @Column(nullable = false)
     private String password;
 
+    // Getters e Setters
     
 	public Long getId() {
 		return id;
@@ -39,7 +40,12 @@ public class Administrador {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
-    
+
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
     
 }
