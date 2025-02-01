@@ -1,3 +1,4 @@
+// Serviço de Evento
 package com.sistema.services;
 
 import com.sistema.models.Evento;
@@ -9,18 +10,23 @@ import java.util.List;
 
 @Service
 public class EventoService {
+
     @Autowired
     private EventoRepository eventoRepository;
-
-    public void salvarEvento(Evento evento) {
-        eventoRepository.save(evento);
-    }
 
     public List<Evento> listarEventos() {
         return eventoRepository.findAll();
     }
 
-    public void excluirEvento(Long id) {
+    public Evento buscarEvento(Long id) {
+        return eventoRepository.findById(id).orElse(null);
+    }
+
+    public void salvarEvento(Evento evento) {
+        eventoRepository.save(evento);
+    }
+
+    public void deletarEvento(Long id) {
         eventoRepository.deleteById(id);
     }
 }
