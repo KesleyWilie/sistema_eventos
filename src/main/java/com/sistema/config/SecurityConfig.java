@@ -9,23 +9,26 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-	
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(auth -> auth
-    	        .requestMatchers("/registro/**", "/login").permitAll() // Permite acesso sem autenticação
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .requestMatchers("/participante/**").hasRole("PARTICIPANTE")
-                .anyRequest().permitAll()
+                .requestMatchers("/login", "/registro").permitAll()
+                .anyRequest().authenticated()
             )
             .formLogin(login -> login
                 .loginPage("/login").permitAll()
                 .defaultSuccessUrl("/dashboard", true)
+                .failureUrl("/login?error=true")
             )
-            .logout(logout -> logout.logoutUrl("/logout").permitAll());
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .permitAll()
+            );
 
         return http.build();
     }
