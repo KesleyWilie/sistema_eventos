@@ -2,7 +2,8 @@ package com.sistema.repositories;
 
 import com.sistema.models.Administrador;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
 public interface AdministradorRepository extends JpaRepository<Administrador, Long> {
-    Administrador findByUsername(String username);
+    Optional<Administrador> findByUsername(String username);
 }
