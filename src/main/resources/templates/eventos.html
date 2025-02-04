@@ -1,35 +1,19 @@
+//eventos.html
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Gerenciamento de Eventos</title>
+    <title>Eventos</title>
 </head>
 <body>
-    <h1>Eventos</h1>
-    <a href="/admin/eventos/novo">Criar Novo Evento</a>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Título</th>
-                <th>Descrição</th>
-                <th>Data</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="evento : ${eventos}">
-                <td th:text="${evento.id}"></td>
-                <td th:text="${evento.titulo}"></td>
-                <td th:text="${evento.descricao}"></td>
-                <td th:text="${evento.data}"></td>
-                <td>
-                    <a th:href="@{'/admin/eventos/editar/' + ${evento.id}}">Editar</a>
-                    <form th:action="@{'/admin/eventos/deletar/' + ${evento.id}}" method="post" style="display:inline;">
-                        <button type="submit">Deletar</button>
-                    </form>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <h1>Lista de Eventos</h1>
+    <ul>
+        <li th:each="evento : ${eventos}">
+            <span th:text="${evento.titulo}"></span>
+            <form th:action="@{'/participante/inscricoes/eventos/' + ${evento.id}}" method="post">
+                <input type="hidden" name="participanteId" value="1" />
+                <button type="submit">Inscrever-se</button>
+            </form>
+        </li>
+    </ul>
 </body>
 </html>
