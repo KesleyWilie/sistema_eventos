@@ -31,15 +31,13 @@ public class InscricaoController {
 
     @PostMapping("/eventos/{eventoId}")
     public String inscreverParticipante(@PathVariable Long eventoId, @RequestParam Long participanteId) {
-        Evento evento = eventoService.listarEventos().stream().filter(e -> e.getId().equals(eventoId)).findFirst().orElse(null);
-        Participante participante = participanteService.listarParticipantes().stream().filter(p -> p.getId().equals(participanteId)).findFirst().orElse(null);
-        
-        if (evento != null && participante != null) {
-            Inscricao inscricao = new Inscricao();
-            inscricao.setEvento(evento);
-            inscricao.setParticipante(participante);
-            inscricaoService.salvarInscricao(inscricao);
-        }
+        Evento evento = eventoService.buscarPorId(eventoId).orElseThrow(() -> new IllegalArgumentException("Evento não encontrado"));
+        Participante participante = participanteService.buscarPorId(participanteId).orElseThrow(() -> new IllegalArgumentException("Participante não encontrado"));
+
+        Inscricao inscricao = new Inscricao();
+        inscricao.setEvento(evento);
+        inscricao.setParticipante(participante);
+        inscricaoService.salvarInscricao(inscricao);
 
         return "redirect:/participante/inscricoes/eventos";
     }
