@@ -5,7 +5,9 @@ import com.sistema.repositories.ParticipanteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParticipanteService {
@@ -19,7 +21,7 @@ public class ParticipanteService {
         participante.setPassword(passwordEncoder.encode(participante.getPassword()));
         participanteRepository.save(participante);
     }
-    
+
     public List<Participante> listarParticipantes() {
         return participanteRepository.findAll();
     }
@@ -27,4 +29,8 @@ public class ParticipanteService {
     public void excluirParticipante(Long id) {
         participanteRepository.deleteById(id);
     }
+    public Optional<Participante> buscarPorId(Long id) {
+        return participanteRepository.findById(id);
+    }
+    
 }
