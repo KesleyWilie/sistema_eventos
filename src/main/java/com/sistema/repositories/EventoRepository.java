@@ -1,4 +1,3 @@
-// Repositório de Evento
 package com.sistema.repositories;
 
 import com.sistema.models.Evento;
