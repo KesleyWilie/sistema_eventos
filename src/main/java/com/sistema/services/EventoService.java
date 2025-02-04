@@ -1,4 +1,3 @@
-// Serviço de Evento
 package com.sistema.services;
 
 import com.sistema.models.Evento;
@@ -7,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventoService {
-
     @Autowired
     private EventoRepository eventoRepository;
 
@@ -18,8 +17,8 @@ public class EventoService {
         return eventoRepository.findAll();
     }
 
-    public Evento buscarEvento(Long id) {
-        return eventoRepository.findById(id).orElse(null);
+    public Optional<Evento> buscarPorId(Long id) {
+        return eventoRepository.findById(id);
     }
 
     public void salvarEvento(Evento evento) {
